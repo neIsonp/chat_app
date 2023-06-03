@@ -13,7 +13,7 @@ class ApplicationPage extends GetView<ApplicationController> {
       controller: controller.pageController,
       onPageChanged: controller.handlePageChanged,
       children: const [
-        Center(child: Text('contacts')),
+        Center(child: Text('Chat')),
         Center(child: Text('Contacts')),
         Center(child: Text('Profile')),
       ],

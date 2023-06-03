@@ -1,3 +1,4 @@
+import 'package:firebase_chat/common/middlewares/middlewares.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -6,7 +7,6 @@ import '../../pages/application/index.dart';
 import '../../pages/welcome/index.dart';
 import '../../pages/signIn/index.dart';
 
-import '../middlewares/router_auth.dart';
 import 'routes.dart';
 
 class AppPages {
@@ -17,10 +17,12 @@ class AppPages {
 
   static final List<GetPage> routes = [
     GetPage(
-      name: AppRoutes.INITIAL,
-      page: () => const WelcomePage(),
-      binding: WelcomeBinding(),
-    ),
+        name: AppRoutes.INITIAL,
+        page: () => const WelcomePage(),
+        binding: WelcomeBinding(),
+        middlewares: [
+          RouteWelcomeMiddleware(priority: 1),
+        ]),
     GetPage(
       name: AppRoutes.SIGN_IN,
       page: () => const SignInPage(),
