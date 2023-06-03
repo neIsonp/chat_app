@@ -1,3 +1,4 @@
+import 'package:firebase_chat/pages/contact/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class ApplicationPage extends GetView<ApplicationController> {
       onPageChanged: controller.handlePageChanged,
       children: const [
         Center(child: Text('Chat')),
-        Center(child: Text('Contacts')),
+        ContactPage(),
         Center(child: Text('Profile')),
       ],
     );

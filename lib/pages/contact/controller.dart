@@ -28,6 +28,7 @@ class ContactController extends GetxController {
 
     for (var doc in userBase.docs) {
       state.contactList.add(doc.data());
+      print(doc.toString());
     }
   }
 }
