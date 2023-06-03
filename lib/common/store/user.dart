@@ -48,7 +48,6 @@ class UserStore extends GetxController {
     setToken(profile.accessToken!);
   }
 
-  //
   Future<void> onLogout() async {
     // if (_isLogin.value) await UserAPI.logout();
     await StorageService.to.remove(STORAGE_USER_TOKEN_KEY);
