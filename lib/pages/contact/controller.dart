@@ -1,18 +1,33 @@
+import 'package:firebase_chat/common/entities/user.dart';
+import 'package:firebase_chat/common/store/store.dart';
 import 'package:firebase_chat/pages/contact/state.dart';
 import 'package:get/get.dart';
-import '../../common/routes/names.dart';
-import '../../common/store/config.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ContactController extends GetxController {
-  final state = ContactState();
   ContactController();
+  final ContactState state = ContactState();
+  final db = FirebaseFirestore.instance;
+  final token = UserStore.to.token;
 
-  changePage(int index) async {
-    state.index.value = index;
+  @override
+  void onReady() {
+    super.onReady();
+    asyncLoadAllData();
   }
 
-  handleSignIn() async {
-    await ConfigStore.to.saveAlreadyOpen();
-    Get.offAndToNamed(AppRoutes.SIGN_IN);
+  asyncLoadAllData() async {
+    QuerySnapshot<UserData> userBase = await db
+        .collection("users")
+        .where("id", isNotEqualTo: token)
+        .withConverter(
+          fromFirestore: UserData.fromFirestore,
+          toFirestore: (UserData userdata, options) => userdata.toFirestore(),
+        )
+        .get();
+
+    for (var doc in userBase.docs) {
+      state.contactList.add(doc.data());
+    }
   }
 }
