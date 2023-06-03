@@ -10,11 +10,12 @@ class ConfigStore extends GetxController {
   bool isFirstOpen = false;
   PackageInfo? _platform;
   String get version => _platform?.version ?? '-';
-  bool get isRelease => bool.fromEnvironment("dart.vm.product"); //what's this
-  Locale locale = Locale('en', 'US');
+  bool get isRelease =>
+      const bool.fromEnvironment("dart.vm.product"); //what's this
+  Locale locale = const Locale('en', 'US');
   List<Locale> languages = [
-    Locale('en', 'US'),
-    Locale('zh', 'CN'),
+    const Locale('en', 'US'),
+    const Locale('zh', 'CN'),
   ];
 
   @override
@@ -27,7 +28,6 @@ class ConfigStore extends GetxController {
     _platform = await PackageInfo.fromPlatform();
   }
 
-  // 标记用户已打开APP
   Future<bool> saveAlreadyOpen() {
     return StorageService.to.setBool(STORAGE_DEVICE_FIRST_OPEN_KEY, true);
   }

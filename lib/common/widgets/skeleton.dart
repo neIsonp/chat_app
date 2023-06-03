@@ -1,5 +1,4 @@
 
-// /// 骨架屏-卡片
 // Widget cardListSkeleton() {
 //   return PKCardListSkeleton(
 //     isCircularImage: true,
@@ -8,7 +7,6 @@
 //   );
 // }
 
-// /// 页面骨架屏
 // Widget pageSkeleton() {
 //   return PKCardPageSkeleton(
 //     totalLines: 5,
