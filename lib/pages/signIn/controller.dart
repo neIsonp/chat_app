@@ -1,8 +1,8 @@
 import 'package:firebase_chat/common/entities/entities.dart';
-import 'package:firebase_chat/common/routes/names.dart';
 import 'package:firebase_chat/common/store/store.dart';
 import 'package:firebase_chat/common/widgets/widgets.dart';
 import 'package:get/get.dart';
+import '../../common/routes/names.dart';
 import 'index.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,9 +44,10 @@ class SignInController extends GetxController {
         var userbase = await db
             .collection("users")
             .withConverter(
-                fromFirestore: UserData.fromFirestore,
-                toFirestore: (UserData userdata, options) =>
-                    userdata.toFirestore())
+              fromFirestore: UserData.fromFirestore,
+              toFirestore: (UserData userdata, options) =>
+                  userdata.toFirestore(),
+            )
             .where("id", isEqualTo: id)
             .get();
 
@@ -68,10 +69,10 @@ class SignInController extends GetxController {
                   toFirestore: (UserData userdata, options) =>
                       userdata.toFirestore())
               .add(data);
-
-          toastInfo(msg: "Conectado com sucesso");
-          Get.offAndToNamed(AppRoutes.Application);
         }
+
+        toastInfo(msg: "Conectado com sucesso");
+        Get.offAndToNamed(AppRoutes.Application);
       }
     } catch (err) {
       toastInfo(msg: "Erro ao conectar-se");

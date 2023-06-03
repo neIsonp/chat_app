@@ -11,6 +11,14 @@ class ApplicationController extends GetxController {
   late final PageController pageController;
   late final List<BottomNavigationBarItem> bottomTabs;
 
+  void handlePageChanged(int index) {
+    state.page = index;
+  }
+
+  void handleNarBarTab(int index) {
+    pageController.jumpToPage(index);
+  }
+
   @override
   void onInit() {
     super.onInit();

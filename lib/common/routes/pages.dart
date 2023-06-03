@@ -32,8 +32,8 @@ class AppPages {
       name: AppRoutes.Application,
       page: () => const ApplicationPage(),
       binding: ApplicationBinding(),
-      middlewares: const [
-        // RouteAuthMiddleware(priority: 1),
+      middlewares: [
+        RouteAuthMiddleware(priority: 1),
       ],
     ),
 
