@@ -41,7 +41,7 @@ class UserStore extends GetxController {
     return StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
   }
 
-  //  profile
+  //  save profile
   Future<void> saveProfile(UserLoginResponseEntity profile) async {
     _isLogin.value = true;
     StorageService.to.setString(STORAGE_USER_PROFILE_KEY, jsonEncode(profile));
