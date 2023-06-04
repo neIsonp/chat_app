@@ -11,7 +11,7 @@ class ChatController extends GetxController {
   var doc_id;
 
   final textController = TextEditingController();
-  ScrollController msgController = ScrollController();
+  ScrollController msgScrolling = ScrollController();
   FocusNode contentNode = FocusNode();
   final user_id = UserStore.to.token;
   final db = FirebaseFirestore.instance;
@@ -68,7 +68,7 @@ class ChatController extends GetxController {
           fromFirestore: Msgcontent.fromFirestore,
           toFirestore: (Msgcontent msg, options) => msg.toFirestore(),
         )
-        .orderBy("addtime", descending: true);
+        .orderBy("addtime", descending: false);
 
     state.msgContentList.clear();
 
@@ -90,5 +90,12 @@ class ChatController extends GetxController {
       },
       onError: (error) => print("listen failed $error"),
     );
+  }
+
+  @override
+  void dispose() {
+    msgScrolling.dispose();
+    listener.cancel();
+    super.dispose();
   }
 }

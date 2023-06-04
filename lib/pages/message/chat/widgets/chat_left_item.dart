@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-Widget ChatRightItem(Msgcontent item) {
+Widget ChatLeftItem(Msgcontent item) {
   return Container(
     padding: EdgeInsets.only(top: 10.w, left: 15.w, right: 15.w, bottom: 10.w),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 230.w, minHeight: 40.2),
