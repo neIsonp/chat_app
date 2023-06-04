@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../pages/application/index.dart';
+import '../../pages/chat/index.dart';
 import '../../pages/contact/index.dart';
 import '../../pages/welcome/index.dart';
 import '../../pages/signIn/index.dart';
@@ -46,10 +47,22 @@ class AppPages {
       binding: ContactBinding(),
     ),
 
+    GetPage(
+      name: AppRoutes.Chat,
+      page: () => const ChatPage(),
+      binding: ChatBinding(),
+    ),
     /*
-    GetPage(name: AppRoutes.Message, page: () => MessagePage(), binding: MessageBinding()),
-    GetPage(name: AppRoutes.Me, page: () => MePage(), binding: MeBinding()),
-    GetPage(name: AppRoutes.Chat, page: () => ChatPage(), binding: ChatBinding()),
+
+    GetPage(
+        name: AppRoutes.Message,
+        page: () => MessagePage(),
+        binding: MessageBinding()),
+    GetPage(
+      name: AppRoutes.Me,
+      page: () => MePage(),
+      binding: MeBinding(),
+    ),
 
     GetPage(name: AppRoutes.Photoimgview, page: () => PhotoImgViewPage(), binding: PhotoImgViewBinding()),*/
   ];
