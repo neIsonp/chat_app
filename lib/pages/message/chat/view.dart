@@ -157,7 +157,7 @@ class ChatPage extends GetView<ChatController> {
                           autofocus: false,
                           focusNode: controller.contentNode,
                           decoration: const InputDecoration(
-                            hintText: "Mandar mensagem...",
+                            hintText: "Enviar mensagem...",
                             border: InputBorder.none,
                           ),
                         ),
