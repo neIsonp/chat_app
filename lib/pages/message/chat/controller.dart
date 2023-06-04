@@ -1,6 +1,6 @@
 import 'package:firebase_chat/common/entities/msgcontent.dart';
 import 'package:firebase_chat/common/store/store.dart';
-import 'package:firebase_chat/pages/chat/state.dart';
+import 'package:firebase_chat/pages/message/chat/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -38,7 +38,7 @@ class ChatController extends GetxController {
     db
         .collection("message")
         .doc(doc_id)
-        .collection("msgList")
+        .collection("msglist")
         .withConverter(
           fromFirestore: Msgcontent.fromFirestore,
           toFirestore: (Msgcontent msg, options) => msg.toFirestore(),

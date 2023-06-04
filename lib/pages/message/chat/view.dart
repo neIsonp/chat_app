@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../common/values/colors.dart';
+import '../../../common/values/colors.dart';
 import 'index.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -116,6 +116,88 @@ class ChatPage extends GetView<ChatController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
+      body: SafeArea(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints.expand(),
+          child: Stack(
+            children: [
+              Positioned(
+                right: 5.w,
+                bottom: 10.h,
+                height: 50.h,
+                left: 5.w,
+                child: Container(
+                  width: 360.w,
+                  height: 50.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: AppColors.primaryBackground,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: const Offset(
+                          0,
+                          3,
+                        ),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SizedBox(
+                        width: 217.w,
+                        height: 50.h,
+                        child: TextField(
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 3,
+                          controller: controller.textController,
+                          autofocus: false,
+                          focusNode: controller.contentNode,
+                          decoration: const InputDecoration(
+                            hintText: "Mandar mensagem...",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 30.h,
+                        width: 30.w,
+                        margin: EdgeInsets.only(left: 25.w),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: const Icon(
+                            Icons.photo_outlined,
+                            color: Colors.blue,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 30.h,
+                        width: 30.w,
+                        margin: EdgeInsets.only(left: 5.w),
+                        child: GestureDetector(
+                          onTap: () {
+                            controller.sendMessage();
+                          },
+                          child: const Icon(
+                            Icons.send_rounded,
+                            color: Colors.blue,
+                            size: 30,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

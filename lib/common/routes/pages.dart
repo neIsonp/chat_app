@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../pages/application/index.dart';
-import '../../pages/chat/index.dart';
+import '../../pages/message/chat/index.dart';
 import '../../pages/contact/index.dart';
 import '../../pages/welcome/index.dart';
 import '../../pages/signIn/index.dart';
