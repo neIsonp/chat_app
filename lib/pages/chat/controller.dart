@@ -1,3 +1,4 @@
+import 'package:firebase_chat/common/entities/msgcontent.dart';
 import 'package:firebase_chat/common/store/store.dart';
 import 'package:firebase_chat/pages/chat/state.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,32 @@ class ChatController extends GetxController {
     state.to_avatar.value = data['to_avatar'] ?? "";
   }
 
-  sendMessage() {
+  sendMessage() async {
     String sendContent = textController.text;
-    final content = 
+    final content = Msgcontent(
+      uid: user_id,
+      content: sendContent,
+      type: "text",
+      addtime: Timestamp.now(),
+    );
+
+    db
+        .collection("message")
+        .doc(doc_id)
+        .collection("msgList")
+        .withConverter(
+          fromFirestore: Msgcontent.fromFirestore,
+          toFirestore: (Msgcontent msg, options) => msg.toFirestore(),
+        )
+        .add(content)
+        .then((DocumentReference doc) {
+      print("document snapshot added with id ${doc.id}");
+      textController.clear();
+      Get.focusScope?.unfocus();
+    });
+    await db.collection("message").doc(doc_id).update({
+      "last_msg": sendContent,
+      "last_time": Timestamp.now(),
+    });
   }
 }
