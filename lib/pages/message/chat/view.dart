@@ -14,15 +14,14 @@ class ChatPage extends GetView<ChatController> {
       backgroundColor: Colors.transparent,
       elevation: 0,
       flexibleSpace: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 176, 106, 231),
-              Color.fromARGB(255, 166, 112, 231),
-              Color.fromARGB(255, 131, 123, 231),
-              Color.fromARGB(255, 104, 106, 231),
+              Colors.blue.shade200,
+              Colors.blue.shade400,
+              Colors.blue.shade800,
             ],
-            transform: GradientRotation(90),
+            transform: const GradientRotation(90),
           ),
         ),
       ),
@@ -76,7 +75,7 @@ class ChatPage extends GetView<ChatController> {
                       onTap: () {},
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             controller.state.to_name.value,
@@ -89,17 +88,17 @@ class ChatPage extends GetView<ChatController> {
                               fontSize: 16.sp,
                             ),
                           ),
-                          Text(
-                            controller.state.to_location.value,
-                            overflow: TextOverflow.clip,
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontFamily: "Avenir",
-                              fontWeight: FontWeight.normal,
-                              color: AppColors.primaryBackground,
-                              fontSize: 14.sp,
-                            ),
-                          )
+                          // Text(
+                          //   controller.state.to_location.value,
+                          //   overflow: TextOverflow.clip,
+                          //   maxLines: 1,
+                          //   style: TextStyle(
+                          //     fontFamily: "Avenir",
+                          //     fontWeight: FontWeight.normal,
+                          //     color: AppColors.primaryBackground,
+                          //     fontSize: 14.sp,
+                          //   ),
+                          // )
                         ],
                       ),
                     ),

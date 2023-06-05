@@ -12,7 +12,7 @@ import '../../pages/signIn/index.dart';
 import 'routes.dart';
 
 class AppPages {
-  static const INITIAL = AppRoutes.INITIAL;
+  static const INITIAL = AppRoutes.SIGN_IN;
   static const APPlication = AppRoutes.Application;
   static final RouteObserver<Route> observer = RouteObservers();
   static List<String> history = [];

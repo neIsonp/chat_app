@@ -26,23 +26,22 @@ class ApplicationController extends GetxController {
     bottomTabs = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(
         icon: Icon(Icons.message, color: AppColors.thirdElementText),
-        activeIcon: Icon(Icons.message, color: AppColors.secondaryElementText),
+        activeIcon: Icon(Icons.message, color: Colors.blue),
         label: 'Chat',
         backgroundColor: AppColors.primaryBackground,
       ),
       const BottomNavigationBarItem(
         icon: Icon(Icons.contact_page, color: AppColors.thirdElementText),
-        activeIcon:
-            Icon(Icons.contact_page, color: AppColors.secondaryElementText),
+        activeIcon: Icon(Icons.contact_page, color: Colors.blue),
         label: 'Contactos',
         backgroundColor: AppColors.primaryBackground,
       ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.person, color: AppColors.thirdElementText),
-        activeIcon: Icon(Icons.person, color: AppColors.secondaryElementText),
-        label: 'Perfil',
-        backgroundColor: AppColors.primaryBackground,
-      ),
+      // const BottomNavigationBarItem(
+      //   icon: Icon(Icons.person, color: AppColors.thirdElementText),
+      //   activeIcon: Icon(Icons.person, color: Colors.blue),
+      //   label: 'Perfil',
+      //   backgroundColor: AppColors.primaryBackground,
+      // ),
     ];
     pageController = PageController(initialPage: state.page);
   }

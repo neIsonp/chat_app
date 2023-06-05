@@ -17,7 +17,7 @@ class ApplicationPage extends GetView<ApplicationController> {
       children: const [
         MessagePage(),
         ContactPage(),
-        Center(child: Text('Profile')),
+        // Center(child: Text('Profile')),
       ],
     );
   }
