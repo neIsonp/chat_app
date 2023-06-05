@@ -113,6 +113,33 @@ class ChatPage extends GetView<ChatController> {
     );
   }
 
+  void _showPicker(context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SafeArea(
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Galeria'),
+                onTap: () {
+                  controller.imgFromGallery();
+                  Get.back();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_camera),
+                title: const Text('Câmara'),
+                onTap: () {},
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,7 +196,9 @@ class ChatPage extends GetView<ChatController> {
                         width: 30.w,
                         margin: EdgeInsets.only(left: 25.w),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            _showPicker(context);
+                          },
                           child: const Icon(
                             Icons.photo_outlined,
                             color: Colors.blue,

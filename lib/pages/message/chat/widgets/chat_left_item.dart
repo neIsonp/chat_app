@@ -19,7 +19,7 @@ Widget ChatLeftItem(Msgcontent item) {
               right: 10.w,
             ),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.white,
               borderRadius: BorderRadius.all(
                 Radius.circular(10.w),
               ),
@@ -27,7 +27,6 @@ Widget ChatLeftItem(Msgcontent item) {
             child: item.type == "text"
                 ? Text(
                     "${item.content}",
-                    style: const TextStyle(color: Colors.white),
                   )
                 : ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: 90.w),

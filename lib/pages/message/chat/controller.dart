@@ -1,9 +1,14 @@
+import 'dart:io';
 import 'package:firebase_chat/common/entities/msgcontent.dart';
 import 'package:firebase_chat/common/store/store.dart';
+import 'package:firebase_chat/common/utils/security.dart';
 import 'package:firebase_chat/pages/message/chat/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class ChatController extends GetxController {
   final state = ChatState();
@@ -16,6 +21,78 @@ class ChatController extends GetxController {
   final user_id = UserStore.to.token;
   final db = FirebaseFirestore.instance;
   var listener;
+
+  File? _photo;
+  final ImagePicker _picker = ImagePicker();
+
+  Future imgFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      _photo = File(pickedFile.path);
+      uploadFile();
+    } else {
+      print("no image selected");
+    }
+  }
+
+  Future getImgUrl(String name) async {
+    final spaceRef = FirebaseStorage.instance.ref("chat").child(name);
+    var str = await spaceRef.getDownloadURL();
+    return str ?? "";
+  }
+
+  sendImageMessage(String url) async {
+    final content = Msgcontent(
+      uid: user_id,
+      content: url,
+      type: "image",
+      addtime: Timestamp.now(),
+    );
+
+    await db
+        .collection("message")
+        .doc(doc_id)
+        .collection("msglist")
+        .withConverter(
+          fromFirestore: Msgcontent.fromFirestore,
+          toFirestore: (Msgcontent msg, options) => msg.toFirestore(),
+        )
+        .add(content)
+        .then((DocumentReference doc) {
+      print("document snapshot added with id ${doc.id}");
+      textController.clear();
+      Get.focusScope?.unfocus();
+    });
+    await db.collection("message").doc(doc_id).update({
+      "last_msg": "[image]",
+      "last_time": Timestamp.now(),
+    });
+  }
+
+  Future uploadFile() async {
+    if (_photo == null) return;
+
+    final filename = getRandomString(15) + extension(_photo!.path);
+
+    try {
+      final ref = FirebaseStorage.instance.ref("chat").child(filename);
+      ref.putFile(_photo!).snapshotEvents.listen((event) async {
+        switch (event.state) {
+          case TaskState.running:
+            break;
+          case TaskState.paused:
+            break;
+          case TaskState.success:
+            String imgUrl = await getImgUrl(filename);
+            sendImageMessage(imgUrl);
+            break;
+        }
+      });
+    } catch (err) {
+      print("there's an erro $err");
+    }
+  }
 
   @override
   void onInit() {
@@ -36,7 +113,7 @@ class ChatController extends GetxController {
       addtime: Timestamp.now(),
     );
 
-    db
+    await db
         .collection("message")
         .doc(doc_id)
         .collection("msglist")
