@@ -19,6 +19,14 @@ class MessageController extends GetxController {
 
   void onRefresh() {
     asyncLoadAllData().then((_) {
+      refreshController.loadComplete();
+    }).catchError((_) {
+      refreshController.loadFailed();
+    });
+  }
+
+  void onLoading() {
+    asyncLoadAllData().then((_) {
       refreshController.refreshCompleted(resetFooterState: true);
     }).catchError((_) {
       refreshController.refreshFailed();

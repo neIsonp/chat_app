@@ -34,13 +34,13 @@ class ApplicationController extends GetxController {
         icon: Icon(Icons.contact_page, color: AppColors.thirdElementText),
         activeIcon:
             Icon(Icons.contact_page, color: AppColors.secondaryElementText),
-        label: 'Contact',
+        label: 'Contactos',
         backgroundColor: AppColors.primaryBackground,
       ),
       const BottomNavigationBarItem(
         icon: Icon(Icons.person, color: AppColors.thirdElementText),
         activeIcon: Icon(Icons.person, color: AppColors.secondaryElementText),
-        label: 'Profile',
+        label: 'Perfil',
         backgroundColor: AppColors.primaryBackground,
       ),
     ];
